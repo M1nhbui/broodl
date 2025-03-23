@@ -1,5 +1,26 @@
+import Main from "@/components/Main";
+import Login from "@/components/Login";
+import Dashboard from "@/components/Dashboard";
+
+export const metadata = {
+    title: "Broodl · Dashboard",
+};
+
 export default function DashboardPage() {
-  return (
-    <div>page</div>
-  )
+
+    const isAuthenticated = false;
+
+    let children = (
+        <Login />
+    )
+
+    if (isAuthenticated) {
+        children = (<Dashboard />)
+    }
+
+    return (
+        <Main>
+            {children}
+        </Main>
+    );
 }
