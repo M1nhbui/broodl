@@ -1,8 +1,7 @@
-import Main from "@/components/Main";
-import Login from "@/components/Login";
 import Dashboard from "@/components/Dashboard";
-import { useAuth } from "@/context/AuthContext";
 import Loading from "@/components/Loading";
+import Login from "@/components/Login";
+import Main from "@/components/Main";
 
 export const metadata = {
     title: "Broodl · Dashboard",
@@ -10,11 +9,9 @@ export const metadata = {
 
 export default function DashboardPage() {
 
-    
-
     return (
         <Main>
             <Dashboard />
         </Main>
-    );
+    )
 }

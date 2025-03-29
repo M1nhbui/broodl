@@ -1,9 +1,8 @@
 'use client'
-import { auth } from '@/firebase'
+import { auth, db } from '@/firebase'
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import React, { useContext, useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore'
-
+import React, { useContext, useState, useEffect } from 'react'
 
 
 const AuthContext = React.createContext()
@@ -13,18 +12,17 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-
     const [currentUser, setCurrentUser] = useState(null)
     const [userDataObj, setUserDataObj] = useState(null)
     const [loading, setLoading] = useState(true)
 
     // AUTH HANDLERS
     function signup(email, password) {
-        return auth.createUserWithEmailAndPassword(auth, email, password)
+        return createUserWithEmailAndPassword(auth, email, password)
     }
 
     function login(email, password) {
-        return auth.signInWithEmailAndPassword(auth, email, password)
+        return signInWithEmailAndPassword(auth, email, password)
     }
 
     function logout() {
@@ -40,11 +38,11 @@ export function AuthProvider({ children }) {
                 setLoading(true)
                 setCurrentUser(user)
                 if (!user) {
-                    console.log('No user found')
+                    console.log('No User Found')
                     return
                 }
 
-                // If user exists, fetch data from firestore database
+                // if user exists, fetch data from firestore database
                 console.log('Fetching User Data')
                 const docRef = doc(db, 'users', user.uid)
                 const docSnap = await getDoc(docRef)

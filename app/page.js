@@ -1,9 +1,9 @@
-import Main from "@/components/Main";
 import Hero from "@/components/Hero";
+import Main from "@/components/Main";
 
 export default function HomePage() {
     return (
-        <Main>
+        <Main className="">
             <Hero />
         </Main>
     );
