@@ -1,6 +1,8 @@
 import Main from "@/components/Main";
 import Login from "@/components/Login";
 import Dashboard from "@/components/Dashboard";
+import { useAuth } from "@/context/AuthContext";
+import Loading from "@/components/Loading";
 
 export const metadata = {
     title: "Broodl · Dashboard",
@@ -8,19 +10,11 @@ export const metadata = {
 
 export default function DashboardPage() {
 
-    const isAuthenticated = true;
-
-    let children = (
-        <Login />
-    )
-
-    if (isAuthenticated) {
-        children = (<Dashboard />)
-    }
+    
 
     return (
         <Main>
-            {children}
+            <Dashboard />
         </Main>
     );
 }
