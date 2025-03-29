@@ -34,21 +34,23 @@ export function AuthProvider({ children }) {
     }
 
     useEffect(() => {
-        const unsubcribe = auth.onAuthStateChanged(auth, async user => {
-            ƒƒ
+        const unsubscribe = onAuthStateChanged(auth, async user => {
             try {
                 // Set the user to our local context state
                 setLoading(true)
                 setCurrentUser(user)
                 if (!user) {
+                    console.log('No user found')
                     return
                 }
 
                 // If user exists, fetch data from firestore database
+                console.log('Fetching User Data')
                 const docRef = doc(db, 'users', user.uid)
                 const docSnap = await getDoc(docRef)
                 let firebaseData = {}
                 if (docSnap.exists()) {
+                    console.log('Found User Data')
                     firebaseData = docSnap.data()
                 }
                 setUserDataObj(firebaseData)
@@ -58,7 +60,7 @@ export function AuthProvider({ children }) {
                 setLoading(false)
             }
         })
-        return unsubcribe
+        return unsubscribe
     }, [])
 
     const value = {
