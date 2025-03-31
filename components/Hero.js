@@ -17,7 +17,7 @@ export default function Hero() {
                 <Link href={'/dashboard'}>
                     <Button text="Login" dark />
                 </Link>
-            </div>
+            </div> 
             <Calendar demo />
         </div>
     )
